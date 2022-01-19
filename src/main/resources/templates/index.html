@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HelloSpringLeaf</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+</head>
+<body>
+<h1>Hello Spring Leaf!</h1>
+<h2 id="userCity"></h2>
+
+
+<div id="productTable"></div>
+<button id="goToBasket">Перейти в корзину</button>
+<div id="productCounter" th:text="${totalProductCount}"></div>
+
+<div id="cityModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Выберите город</h2>
+        </div>
+        <div class="modal-body">
+            <select id="citySelect">
+                <option value="1">Москва</option>
+                <option value="2">Пермь</option>
+                <option value="3">Петербург</option>
+            </select>
+            <button id="selectCityBtn">Ок</button>
+        </div>
+    </div>
+</div>
+
+</body>
+<script th:src="@{/js/main.js}"></script>
+</html>
