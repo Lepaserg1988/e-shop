@@ -1,0 +1,3 @@
+setOnClick("textSearchButton", () => {
+    getProductList();
+})
