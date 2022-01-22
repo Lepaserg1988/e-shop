@@ -1,24 +1,26 @@
-fetch('http://localhost:8080/products')
-    .then(response => response.json())
-    .then(result => buildResultTable(result));
-
+let productTable = document.getElementById("productTable");
 let modal = document.getElementById('cityModal');
-if (getCookie("city")) {
-    showUserCity();
-}
-
-function showUserCity(){
-    let userCityId = getCookie("city");
-    let userCityName = document.querySelector('#citySelect option[value="' + userCityId +  '"]').textContent;
-    document.getElementById('userCity').textContent = userCityName;
-    modal.style.display = "none";
-}
-
-
 let productCounter = document.getElementById("productCounter");
 
+function init(){
+    getProductList();
+    if (getCookie("city")) {
+        showUserCity();
+    }
+}
+init();
+
+//получение списка продуктов с сервера
+function getProductList() {
+    productTable.innerHTML = "";
+    let url = getSearchProductUrl();
+    fetch('/products' + url)
+        .then(response => response.json())
+        .then(result => buildResultTable(result));
+}
+
+//построение таблицы с продуктами
 function buildResultTable(productList){
-    let productTable = document.getElementById("productTable");
     productList.forEach(product => {
         let nameDiv = document.createElement("div");
         nameDiv.textContent = product.name;
@@ -41,6 +43,7 @@ function buildResultTable(productList){
     });
 }
 
+//построение кнопки "добавить в корзину"
 function buildAddToBasketBtn(id){
     let addToBasketBtn = document.createElement("button");
     addToBasketBtn.textContent = "Добавить в корзину";
@@ -56,52 +59,11 @@ function buildAddToBasketBtn(id){
     return addToBasketBtn;
 }
 
-let goToBasketBtn = document.getElementById("goToBasket");
-goToBasketBtn.addEventListener("click", function (){
+let productSortSelect = document.getElementById('productSort');
+productSortSelect.addEventListener("change", function (){
+    getProductList();
+})
+
+setOnClick("goToBasket", () => {
     location.href = "/basket"
 })
-
-let userCityEl = document.getElementById("userCity");
-userCityEl.addEventListener("click", function (){
-    modal.style.display = "block";
-})
-
-let selectCityBtn = document.getElementById("selectCityBtn");
-let citySelect = document.getElementById("citySelect");
-selectCityBtn.addEventListener("click", function (){
-    setCookie("city", citySelect.value);
-    showUserCity();
-})
-
-
-function setCookie(name, value, options = {}) {
-
-    options = {
-        path: '/',
-        // при необходимости добавьте другие значения по умолчанию
-        ...options
-    };
-
-    if (options.expires instanceof Date) {
-        options.expires = options.expires.toUTCString();
-    }
-
-    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-    for (let optionKey in options) {
-        updatedCookie += "; " + optionKey;
-        let optionValue = options[optionKey];
-        if (optionValue !== true) {
-            updatedCookie += "=" + optionValue;
-        }
-    }
-
-    document.cookie = updatedCookie;
-}
-
-function getCookie(name) {
-    let matches = document.cookie.match(new RegExp(
-        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-    ));
-    return matches ? decodeURIComponent(matches[1]) : undefined;
-}

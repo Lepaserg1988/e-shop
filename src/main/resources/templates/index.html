@@ -7,7 +7,14 @@
 <body>
 <h1>Hello Spring Leaf!</h1>
 <h2 id="userCity"></h2>
-
+<div>
+    <input id="textSearchInput"/>
+    <button id="textSearchButton">Искать</button>
+</div>
+<select id="productSort">
+    <option value="0">Отсортировать по цене (по возрастанию)</option>
+    <option value="1">Отсортировать по цене (по убыванию)</option>
+</select>
 
 <div id="productTable"></div>
 <button id="goToBasket">Перейти в корзину</button>
@@ -30,5 +37,9 @@
 </div>
 
 </body>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:src="@{/js/cookieCity.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/product.search.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 </html>
