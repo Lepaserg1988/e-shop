@@ -5,8 +5,34 @@
     <title>Корзина</title>
 </head>
 <body>
-
+<h2 id="userCity"></h2>
 корзина
 
+<div id="productTable"></div>
+<button id="makeOrder">Оформить покупку</button>
+
+
+<div id="cityModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Выберите город</h2>
+        </div>
+        <div class="modal-body">
+            <select id="citySelect">
+                <option value="1">Москва</option>
+                <option value="2">Пермь</option>
+                <option value="3">Петербург</option>
+            </select>
+            <button id="selectCityBtn">Ок</button>
+        </div>
+    </div>
+</div>
+
 </body>
+
+</body>
+<script th:src="@{/js/cookie.js}"></script>
+<script th:src="@{/js/cookieCity.js}"></script>
+<script th:src="@{/js/util.js}"></script>
+<script th:src="@{/js/basket.js}"></script>
 </html>

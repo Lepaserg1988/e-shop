@@ -48,7 +48,9 @@ function buildAddToBasketBtn(id){
     let addToBasketBtn = document.createElement("button");
     addToBasketBtn.textContent = "Добавить в корзину";
     addToBasketBtn.addEventListener("click", function (){
-        fetch('http://localhost:8080/addToBasket?productId=' + id)
+        fetch('http://localhost:8080/addToBasket?productId=' + id, {
+            method: 'PUT',
+        })
             .then(response => response.json())
             .then(result => {
                 console.log(result);
@@ -67,3 +69,5 @@ productSortSelect.addEventListener("change", function (){
 setOnClick("goToBasket", () => {
     location.href = "/basket"
 })
+
+
