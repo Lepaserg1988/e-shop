@@ -1,0 +1,8 @@
+.product-row {
+    align-items: center;
+}
+
+.count-change {
+    display: flex;
+    align-items: center;
+}

@@ -1,37 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>HelloSpringLeaf</title>
+    <title>Shop</title>
     <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/modal.css}"/>
+    <link rel="stylesheet" th:href="@{/css/notification.css}"/>
 </head>
 <body>
-<h1>Hello Spring Leaf!</h1>
-<h2 id="userCity"></h2>
-<div>
-    <input id="textSearchInput"/>
-    <button id="textSearchButton">Искать</button>
+<div id="main">
+    <div id="title">
+        <h1>Shop!</h1>
+        <a id="userCity"></a>
+    </div>
+    <div id="filter">
+        <div>
+            <input id="textSearchInput"/>
+            <button id="textSearchButton">Искать</button>
+        </div>
+        <select id="productSort">
+            <option value="0">Отсортировать по цене (по возрастанию)</option>
+            <option value="1">Отсортировать по цене (по убыванию)</option>
+        </select>
+    </div>
+    <div id="productTable"></div>
+    <a href="#" class="notification" id="goToBasket">
+        <span> Перейти в корзину </span>
+        <span class="badge" id="productCounter" th:text="${totalProductCount}">3</span>
+    </a>
 </div>
-<select id="productSort">
-    <option value="0">Отсортировать по цене (по возрастанию)</option>
-    <option value="1">Отсортировать по цене (по убыванию)</option>
-</select>
-
-<div id="productTable"></div>
-<button id="goToBasket">Перейти в корзину</button>
-<div id="productCounter" th:text="${totalProductCount}"></div>
 
 <div id="cityModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
             <h2>Выберите город</h2>
         </div>
-        <div class="modal-body">
-            <select id="citySelect">
-                <option value="1">Москва</option>
-                <option value="2">Пермь</option>
-                <option value="3">Петербург</option>
-            </select>
-            <button id="selectCityBtn">Ок</button>
+        <div>
+            <div class="modal-body">
+                <select id="citySelect">
+                    <option value="1">Москва</option>
+                    <option value="2">Пермь</option>
+                    <option value="3">Петербург</option>
+                </select>
+                <button id="selectCityBtn">Ок</button>
+            </div>
         </div>
     </div>
 </div>

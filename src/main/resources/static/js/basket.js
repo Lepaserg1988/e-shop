@@ -24,26 +24,31 @@ function buildResultTable(productList){
         nameDiv.textContent = product.name;
         let countDiv = document.createElement("div");
         countDiv.textContent = product.count;
+        countDiv.style.margin  = "10px";
         let priceDiv = document.createElement("div");
         priceDiv.textContent = product.price;
         let photoImg = document.createElement("img");
-        photoImg.setAttribute("width", "50");
-        photoImg.setAttribute("height", "60");
-        photoImg.setAttribute("src", "/images/1.jpg")
+        photoImg.setAttribute("width", "120");
+        photoImg.setAttribute("height", "100");
+        photoImg.setAttribute("src", '/images/' + product.photoUrl)
 
 
         let addToBasketBtn = buildAddToBasketBtn(product.id);
         let reduceFromBasketBtn = buildReduceFromBasketBtn(product.id);
         let deleteFromBasketBtn = buildDeleteFromBasketBtn(product.id);
 
+        let countChangeDiv = document.createElement("div");
+        countChangeDiv.className = "count-change"
+        countChangeDiv.appendChild(reduceFromBasketBtn);
+        countChangeDiv.appendChild(countDiv);
+        countChangeDiv.appendChild(addToBasketBtn);
         let productDiv = document.createElement("div");
-        productDiv.appendChild(nameDiv);
-        productDiv.appendChild(countDiv);
-        productDiv.appendChild(priceDiv);
-        productDiv.appendChild(addToBasketBtn);
-        productDiv.appendChild(reduceFromBasketBtn);
-        productDiv.appendChild(deleteFromBasketBtn);
+        productDiv.className = "product-row"
         productDiv.appendChild(photoImg);
+        productDiv.appendChild(nameDiv);
+        productDiv.appendChild(priceDiv);
+        productDiv.appendChild(countChangeDiv);
+        productDiv.appendChild(deleteFromBasketBtn);
         productTable.appendChild(productDiv);
     });
 

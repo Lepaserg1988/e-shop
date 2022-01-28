@@ -6,6 +6,8 @@ function init(){
     getProductList();
     if (getCookie("city")) {
         showUserCity();
+    } else {
+        modal.style.display = "block";
     }
 }
 init();
@@ -29,16 +31,22 @@ function buildResultTable(productList){
         let priceDiv = document.createElement("div");
         priceDiv.textContent = product.price;
         let photoImg = document.createElement("img");
-        photoImg.setAttribute("width", "50");
-        photoImg.setAttribute("height", "60");
-        photoImg.setAttribute("src", "/images/1.jpg")
+        photoImg.setAttribute("width", "120");
+        photoImg.setAttribute("height", "100");
+        photoImg.setAttribute("src", "/images/" + product.photoUrl)
+        let addToBasketBtn = buildAddToBasketBtn(product.id)
 
+        let mainInfoDiv = document.createElement("div");
+        mainInfoDiv.appendChild(nameDiv);
+        mainInfoDiv.appendChild(descriptionDiv);
+        let orderInfoDiv = document.createElement("div");
+        orderInfoDiv.appendChild(priceDiv);
+        orderInfoDiv.appendChild(addToBasketBtn);
         let productDiv = document.createElement("div");
-        productDiv.appendChild(nameDiv);
-        productDiv.appendChild(descriptionDiv);
-        productDiv.appendChild(priceDiv);
+        productDiv.className = "product-row"
         productDiv.appendChild(photoImg);
-        productDiv.appendChild(buildAddToBasketBtn(product.id));
+        productDiv.appendChild(mainInfoDiv);
+        productDiv.appendChild(orderInfoDiv);
         productTable.appendChild(productDiv);
     });
 }
